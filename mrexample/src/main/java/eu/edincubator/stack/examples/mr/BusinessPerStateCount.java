@@ -26,11 +26,12 @@ public class BusinessPerStateCount {
             String[] line;
 
             while ((line = reader.readNext()) != null) {
-                // Write "one" for current state to context
-                context.write(new Text(line[5]), one);
+                // Check that current line is not CSV's header
+                if (!line.equals("state")) {
+                    // Write "one" for current state to context
+                    context.write(new Text(line[5]), one);
+                }
             }
-
-
         }
     }
 

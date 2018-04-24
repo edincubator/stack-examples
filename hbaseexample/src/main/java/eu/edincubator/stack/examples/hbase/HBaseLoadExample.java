@@ -140,6 +140,5 @@ public class HBaseLoadExample extends Configured implements Tool {
     public static void main(String [] args) throws Exception {
         int status = ToolRunner.run(HBaseConfiguration.create(), new HBaseLoadExample(), args);
         System.exit(status);
-
     }
 }

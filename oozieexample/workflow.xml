@@ -1,0 +1,50 @@
+<workflow-app name="Test workflow"
+	xmlns="uri:oozie:workflow:0.5">
+	<global>
+		<configuration>
+			<property>
+				<name>oozie.use.system.libpath</name>
+				<value>true</value>
+			</property>
+			<property>
+				<name>oozie.action.sharelib.for.spark</name>
+				<value>spark2</value>
+			</property>
+		</configuration>
+	</global>
+	<start to="fs_1"/>
+	<action name="fs_1">
+		<fs>
+			<name-node>${nameNode}</name-node>
+			<delete path="/user/docuser/pig-output"></delete>
+			<delete path="/user/docuser/spark-oozie-output"></delete>
+		</fs>
+		<ok to="pig_1"/>
+		<error to="pig_1"/>
+	</action>
+	<action name="pig_1">
+		<pig>
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<script>/user/docuser/pig/scripts/yelpbusiness-2018-06-07_12-45.pig</script>
+		</pig>
+		<ok to="spark_1"/>
+		<error to="kill"/>
+	</action>
+	<action name="spark_1">
+		<spark
+			xmlns="uri:oozie:spark-action:0.2">
+			<job-tracker>${resourceManager}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<master>yarn-cluster</master>
+			<name>SparkOozieTest</name>
+			<jar>hdfs://gauss.res.eng.it:8020/user/docuser/workflows/spark.py</jar>
+		</spark>
+		<ok to="end"/>
+		<error to="kill"/>
+	</action>
+	<kill name="kill">
+		<message>${wf:errorMessage(wf:lastErrorNode())}</message>
+	</kill>
+	<end name="end"/>
+</workflow-app>

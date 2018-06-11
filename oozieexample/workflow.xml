@@ -24,7 +24,7 @@
 	</action>
 	<action name="pig_1">
 		<pig>
-			<job-tracker>${resourceManager}</job-tracker>
+			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
 			<script>/user/docuser/pig/scripts/yelpbusiness-2018-06-07_12-45.pig</script>
 		</pig>
@@ -34,7 +34,7 @@
 	<action name="spark_1">
 		<spark
 			xmlns="uri:oozie:spark-action:0.2">
-			<job-tracker>${resourceManager}</job-tracker>
+			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
 			<master>yarn-cluster</master>
 			<name>SparkOozieTest</name>

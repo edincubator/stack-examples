@@ -1,4 +1,5 @@
 import argparse
+
 from pyspark.sql import SparkSession
 
 parser = argparse.ArgumentParser(description='Execute Spark2 Yelp example.')

@@ -16,8 +16,8 @@
 	<action name="fs_1">
 		<fs>
 			<name-node>${nameNode}</name-node>
-			<delete path="/user/docuser/pig-output"></delete>
-			<delete path="/user/docuser/spark-oozie-output"></delete>
+			<delete path="/user/${user.name}/${examplesRoot}/pig-output"></delete>
+			<delete path="/user/${user.name}/${examplesRoot}/spark-oozie-output"></delete>
 		</fs>
 		<ok to="pig_1"/>
 		<error to="pig_1"/>
@@ -26,7 +26,8 @@
 		<pig>
 			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
-			<script>/user/docuser/pig/scripts/yelpbusiness-2018-06-07_12-45.pig</script>
+			<script>/user/${user.name}/${examplesRoot}/yelp_business.py</script>
+			<argument>-p username=${user.name}</argument>
 		</pig>
 		<ok to="spark_1"/>
 		<error to="kill"/>
@@ -38,7 +39,10 @@
 			<name-node>${nameNode}</name-node>
 			<master>yarn-cluster</master>
 			<name>SparkOozieTest</name>
-			<jar>hdfs://gauss.res.eng.it:8020/user/docuser/workflows/spark.py</jar>
+			<jar>${namenode}/user/${user.name}/${examplesRoot}/spark.py</jar>
+			<arg>app_name=${user.name}SparkOozieExample</arg>
+			<arg>user_name=${user.name}</arg>
+			<arg>example_dir=${examplesRoot}</arg>
 		</spark>
 		<ok to="end"/>
 		<error to="kill"/>

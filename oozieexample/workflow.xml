@@ -27,8 +27,8 @@
 			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
 			<script>/user/${user}/${examplesRoot}/yelp_business.pig</script>
-			<param>-p username=${user}</param>
-			<param>-p output_dir=/user/${user}/${examplesRoot}/pig-output</param>
+			<argument>-param</argument>
+			<argument>output_dir=/user/${user}/${examplesRoot}/pig-output</argument>
 		</pig>
 		<ok to="spark_1"/>
 		<error to="kill"/>
@@ -39,7 +39,7 @@
 			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
 			<master>yarn-cluster</master>
-			<name>SparkOozieTest</name>
+			<name>${user}SparkOozieTest</name>
 			<jar>${nameNode}/user/${user}/${examplesRoot}/spark.py</jar>
 			<arg>--app_name=${user}SparkOozieExample</arg>
 			<arg>--username=${user}</arg>

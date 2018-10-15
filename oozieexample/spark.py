@@ -6,8 +6,8 @@ parser = argparse.ArgumentParser(description='Execute Spark2 Oozie example.')
 parser.add_argument(
     '--app_name', type=str, help="Application name",
     default='SparkOozieExample')
-parser.add_argument('username', type=str, help="User launching the job")
-parser.add_argument('example_dir', type=str, help="Oozie example dir")
+parser.add_argument('--username', type=str, help="User launching the job")
+parser.add_argument('--example_dir', type=str, help="Oozie example dir")
 
 
 args = parser.parse_args()

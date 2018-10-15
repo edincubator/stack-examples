@@ -16,8 +16,8 @@
 	<action name="fs_1">
 		<fs>
 			<name-node>${nameNode}</name-node>
-			<delete path="/user/${user.name}/${examplesRoot}/pig-output"></delete>
-			<delete path="/user/${user.name}/${examplesRoot}/spark-oozie-output"></delete>
+			<delete path="/user/${user}/${examplesRoot}/pig-output"></delete>
+			<delete path="/user/${user}/${examplesRoot}/spark-oozie-output"></delete>
 		</fs>
 		<ok to="pig_1"/>
 		<error to="pig_1"/>
@@ -26,8 +26,9 @@
 		<pig>
 			<job-tracker>${jobTracker}</job-tracker>
 			<name-node>${nameNode}</name-node>
-			<script>/user/${user.name}/${examplesRoot}/yelp_business.py</script>
-			<argument>-p username=${user.name}</argument>
+			<script>/user/${user}/${examplesRoot}/yelp_business.pig</script>
+			<param>-p username=${user}</param>
+			<param>-p output_dir=/user/${user}/${examplesRoot}/pig-output</param>
 		</pig>
 		<ok to="spark_1"/>
 		<error to="kill"/>
@@ -39,10 +40,10 @@
 			<name-node>${nameNode}</name-node>
 			<master>yarn-cluster</master>
 			<name>SparkOozieTest</name>
-			<jar>${namenode}/user/${user.name}/${examplesRoot}/spark.py</jar>
-			<arg>app_name=${user.name}SparkOozieExample</arg>
-			<arg>user_name=${user.name}</arg>
-			<arg>example_dir=${examplesRoot}</arg>
+			<jar>${nameNode}/user/${user}/${examplesRoot}/spark.py</jar>
+			<arg>--app_name=${user}SparkOozieExample</arg>
+			<arg>--username=${user}</arg>
+			<arg>--example_dir=${examplesRoot}</arg>
 		</spark>
 		<ok to="end"/>
 		<error to="kill"/>

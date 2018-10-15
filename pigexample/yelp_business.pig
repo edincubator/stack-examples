@@ -18,4 +18,4 @@ yelp_business = LOAD '/samples/yelp/yelp_business/yelp_business.csv' using CSVLo
 
 grouped_business = GROUP yelp_business BY state;
 counted_business = FOREACH grouped_business GENERATE group, COUNT(yelp_business);
-STORE counted_business INTO '/user/${username}/pig-output' USING PigStorage(',');
+STORE counted_business INTO '${output_dir}' USING PigStorage(',');

@@ -51,10 +51,15 @@
             <artifactId>hbase-thrift</artifactId>
             <version>${hbase.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-mapreduce</artifactId>
+            <version>${hbase.version}</version>
+          </dependency>
     </dependencies>
 
     <properties>
-        <hadoop.version>2.7.3</hadoop.version>
-        <hbase.version>1.1.2</hbase.version>
+        <hadoop.version>3.0.0</hadoop.version>
+        <hbase.version>2.0.0</hbase.version>
     </properties>
 </project>

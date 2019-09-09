@@ -1,4 +1,4 @@
-REGISTER /usr/hdp/current/pig-client/piggybank.jar
+REGISTER /opt/pig/lib/piggybank.jar
 define CSVLoader org.apache.pig.piggybank.storage.CSVLoader();
 
 yelp_business = LOAD '/samples/yelp/yelp_business/yelp_business.csv' using CSVLoader AS (

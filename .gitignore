@@ -32,3 +32,4 @@ target/*
 .settings
 
 hbaseexample/target/*
+.ipynb_checkpoints

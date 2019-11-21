@@ -1,6 +1,10 @@
 import tensorflow as tf
 from tensorflow import keras
 
+import sys
+
+EPOCH = int(sys.argv[1])
+
 imdb = keras.datasets.imdb
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)
@@ -55,7 +59,7 @@ partial_y_train = train_labels[10000:]
 
 history = model.fit(partial_x_train,
                     partial_y_train,
-                    epochs=40,
+                    epochs=EPOCH,
                     batch_size=512,
                     validation_data=(x_val, y_val),
                     verbose=1)
